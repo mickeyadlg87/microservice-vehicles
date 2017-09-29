@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+/.idea/
+/tastets-metadata-vehicles.iml
+/target/
+nbactions.xml
+/.project
+/.classpath
+/.settings

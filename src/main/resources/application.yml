@@ -1,0 +1,270 @@
+#set active profile for dev properties
+spring:
+  profiles:
+      active: ${TSENV}
+
+server:
+  port: 42100
+  tomcat:
+        compression: on
+        compressableMimeTypes: application/json,application/xml
+        
+hystrix: 
+  threadpool:
+    default:
+      maxQueueSize: 250
+      queueSizeRejectionThreshold: 250
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 170000
+ribbon:
+  MaxAutoRetries: 2
+  # Max number of next servers to retry (excluding the first server)
+  MaxAutoRetriesNextServer: 2        
+  OkToRetryOnAllOperations: true
+  ServerListRefreshInterval: 2000
+  ConnectTimeout: 6000
+  ReadTimeout: 6000
+  
+#incidents
+events:
+    incidents: 1,4,5,126,122,201,144,30,14,15,13,253,130,126,68,133,135,168,187,193,195,201,38
+        
+---
+#FOR PRODUCCTION
+
+spring:
+    profiles: PROD
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://10.11.121.12:40000/eureka/, http://10.11.121.14:40000/eureka/
+  instance:
+    metadataMap:
+      instanceId: ${spring.application.name}:${random.value}
+    preferIpAddress: true
+
+mongo:
+    host : mongodb://10.10.121.114
+    database:
+        name: gps
+    collection:
+        name:
+            lastState: last_state
+
+#mysql datasources
+entel:
+    url : jdbc:mysql://10.12.121.3:3307/rastreosat?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps.,2013
+    min : 10
+    max : 30
+
+#rastreosat
+rastreosat:
+    url : jdbc:mysql://10.12.121.2:3306/rastreosat?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps
+    min : 2
+    max : 30
+    
+#rslite
+lite: 
+    url : jdbc:mysql://10.12.121.6:3306/rsLite3?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps.,2013
+    min : 2
+    max : 30
+    
+---
+#FOR QA
+
+spring:
+    profiles: AWS-QA
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://microservicios01.qa.reddsystem.com:40000/eureka/, http://microservicios02.qa.reddsystem.com:40000/eureka/
+  instance:
+    metadataMap:
+      instanceId: ${spring.application.name}:${random.value}
+    preferIpAddress: true
+
+mongo:
+    host : mongodb://laststate01.qa.reddsystem.com
+    database:
+        name: gps
+    collection:
+        name:
+            lastState: last_state
+            
+#mysql datasources
+entel:
+    url : jdbc:mysql://entellitedb.qa.reddsystem.com:3307/rastreosat?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps.,2013
+    min : 10
+    max : 20
+
+#rastreosat
+rastreosat:
+    url : jdbc:mysql://172.16.120.13:3307/rastreosat?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps.,2013
+    min : 10
+    max : 20
+    
+#rslite
+lite: 
+    url : jdbc:mysql://rslitedb.qa.reddsystem.com:3306/rsLite3?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps.,2013
+    min : 10
+    max : 20
+
+
+---
+#FOR LOCAL
+
+spring:
+    profiles: LOCAL
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://definite-boats.maas.reddsystem.com:40000/eureka/
+  instance:
+    metadataMap:
+      instanceId: ${spring.application.name}:${random.value}
+    preferIpAddress: true
+
+mongo:
+    host : mongodb://gracious-neck.maas.reddsystem.com
+    database:
+        name: gps
+    collection:
+        name:            
+            lastState: lastState
+            
+#mysql datasources
+entel:
+    url : jdbc:mysql://gracious-neck.maas.reddsystem.com:3306/rastreosat?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps
+    min : 10
+    max : 20
+
+#rastreosat
+rastreosat:
+    url : jdbc:mysql://gracious-neck.maas.reddsystem.com:3306/rastreosat?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps
+    min : 10
+    max : 20
+    
+#rslite
+lite: 
+    url : jdbc:mysql://gracious-neck.maas.reddsystem.com:3306/rsLite3?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps
+    min : 10
+    max : 20
+
+---
+#FOR DESA
+
+spring:
+    profiles: DESA
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://definite-boats.maas.reddsystem.com:40000/eureka/
+  instance:
+    metadataMap:
+      instanceId: ${spring.application.name}:${random.value}
+    preferIpAddress: true
+
+mongo:
+    host : mongodb://gracious-neck.maas.reddsystem.com
+    database:
+        name: gps
+    collection:
+        name:
+            lastState: last_state
+
+#mysql datasources
+entel:
+    url : jdbc:mysql://gracious-neck.maas.reddsystem.com:3306/rastreosat?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps
+    min : 10
+    max : 20
+
+#rastreosat
+rastreosat:
+    url : jdbc:mysql://gracious-neck.maas.reddsystem.com:3306/rastreosat?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps
+    min : 10
+    max : 20
+
+#rslite
+lite:
+    url : jdbc:mysql://gracious-neck.maas.reddsystem.com:3306/rsLite3?sessionVariables=group_concat_max_len=1000000
+    user : gps
+    password : gps
+    min : 10
+    max : 20
+    
+---
+#FOR PROD
+
+spring:
+    profiles: AWS-PROD
+       
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://microservicios01.prod.reddsystem.com:40000/eureka/,  http://microservicios02.prod.reddsystem.com:40000/eureka/
+  instance:
+    metadataMap:
+      instanceId: ${spring.application.name}:${random.value}
+    preferIpAddress: true
+        
+mongo:
+    host : mongodb://laststate01.prod.reddsystem.com:27017,laststate02.prod.reddsystem.com:27017/?replicaSet=laststate
+    database:
+        name: gps
+    collection:
+        name:
+            lastState: last_state
+            
+#mysql datasources
+entel:
+    url : jdbc:mysql://entellitedb.prod.reddsystem.com:3306/rastreosat
+    user : usr_entellite
+    password : "5bukbwx2,VBPWByb"
+    min : 2
+    max : 10
+
+#rastreosat
+rastreosat:
+    url : jdbc:mysql://entellitedb.prod.reddsystem.com:3306/rastreosat
+    user : usr_entellite
+    password : "5bukbwx2,VBPWByb"
+    min : 2
+    max : 10
+    
+#rslite
+lite: 
+    url : jdbc:mysql://rslitedb.prod.reddsystem.com:3306/rsLite3
+    user : usr_rslite
+    password : "2UThd>dxF+hy>MSM"
+    min : 2
+    max : 10

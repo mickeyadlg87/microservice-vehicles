@@ -1,0 +1,73 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" 
+	updateCheck="true"
+	monitoring="autodetect" 
+	dynamicConfig="true">
+ 
+	<diskStore path="java.io.tmpdir" />
+ 
+	<cache name="vehicle" 
+		maxEntriesLocalHeap="10000"
+		maxEntriesLocalDisk="30000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="5400" timeToLiveSeconds="5400"
+		memoryStoreEvictionPolicy="LFU" 
+		transactionalMode="off"
+		copyOnRead="true"
+   		copyOnWrite="true">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<cache name="tag" 
+		maxEntriesLocalHeap="5000"
+		maxEntriesLocalDisk="10000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="900" timeToLiveSeconds="1800"
+		memoryStoreEvictionPolicy="LFU" 
+		transactionalMode="off"
+		copyOnRead="true"
+   		copyOnWrite="true">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<cache name="vehicles" 
+		maxEntriesLocalHeap="5000"
+		maxEntriesLocalDisk="6000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="5400" timeToLiveSeconds="5400"
+		memoryStoreEvictionPolicy="LFU" 
+		transactionalMode="off" 
+		copyOnRead="true" 
+ 		copyOnWrite="true" >
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<cache name="fleets" 
+		maxEntriesLocalHeap="5000"
+		maxEntriesLocalDisk="6000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="900" timeToLiveSeconds="1800"
+		memoryStoreEvictionPolicy="LFU" 
+		transactionalMode="off" 
+		copyOnRead="true"
+   		copyOnWrite="true">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="vehicleTypes"
+		   maxEntriesLocalHeap="100"
+		   maxEntriesLocalDisk="100"
+		   eternal="false"
+		   diskSpoolBufferSizeMB="20"
+		   timeToIdleSeconds="900" timeToLiveSeconds="1800"
+		   memoryStoreEvictionPolicy="LFU"
+		   transactionalMode="off"
+		   copyOnRead="true"
+		   copyOnWrite="true">
+		<persistence strategy="localTempSwap" />
+	</cache>
+
+</ehcache>
